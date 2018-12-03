@@ -8,7 +8,15 @@ int main(int argc, int argv[])
    try{
       // Replace "localhost" with the hostname
       // that you're running your server.
-      ClientSocket client_socket("cs.uleth.ca", 30000);
+      std::string serv_name;
+      std::cout << "where is the server running? <inut>.cs.uleth.ca: ";
+      std::cin >> serv_name;
+      std::cout << "Which port would you like to connect to? ";
+      int port_name;
+      std::cin >> port_name;
+      
+      ClientSocket client_socket(serv_name, port_name);
+
       std::string reply;
       std::string data;
       std::string data_c;

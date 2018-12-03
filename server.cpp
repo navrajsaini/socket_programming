@@ -91,9 +91,9 @@ int main(int argc, int argv[])
 			break;
 		  }
 	       }
-	       
 	       new_sock << data;//send the data
 	       new_sock >> data;//wait for a responce
+	       std::cout << data << "\n";
 	       new_sock << data_c;//send the parity bits
 	       new_sock >> ack;//get the ack
 	       if (ack == "ACK")
