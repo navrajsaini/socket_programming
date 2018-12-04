@@ -41,8 +41,7 @@ void parit (int bin_len[], int counter, int rand, int size)
       bin_len[0] = 1;
    else if (parity % 2 == 0)
       bin_len[0] = 0;
-   if ((counter == 1 or counter == 5) &&
-       (rand == 1 or rand == 5))
+   if (counter % 5 == 1)
    {
       if (bin_len[0] == 1)
 	 bin_len[0] = 0;
@@ -162,7 +161,7 @@ int main(int argc, int argv[])
 		     
 		     new_sock << data_c;
 		     new_sock >> repl;//get a reply back
-		     std::cout << "The ACK for the retransmission is: " << repl << "\n";
+		     //std::cout << "The ACK for the retransmission is: " << repl << "\n";
 		  }
 		  data_c = "";
 	       }

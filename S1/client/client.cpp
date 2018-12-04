@@ -108,7 +108,7 @@ int main(int argc, int argv[])
 //store the parity check locally
 	    data_rep = reply;
 //check the parity frame created with the one recieved
-	    if (data_c[0] == data_rep[0])
+	    if (!(data_c[0] == data_rep[0]))
 	       client_socket << "ACK";
 	    else
 	    {
