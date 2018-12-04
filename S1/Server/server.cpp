@@ -1,3 +1,8 @@
+/*
+  By: Navraj Saini, Bhupinder Gill, Tamanna
+  Final class project for Networking
+
+*/
 #include "ServerSocket.h"
 #include "SocketException.h"
 #include <string>
