@@ -76,8 +76,6 @@ int main(int argc, int argv[])
    srand (time(NULL));
    int counter = 0;
 //open the file with the data being sent
-   std::ifstream ifs;
-   ifs.open("input", std::ifstream::in);
    
    std::cout << "running....\n";
    try{
@@ -88,10 +86,15 @@ int main(int argc, int argv[])
 	 counter++;
 //random num gen
 	 int random = rand() % 5;
-	 
+	 std::string file_name;
 	 ServerSocket new_sock;
+
+	 std::ifstream ifs;
+   
 	 server.accept(new_sock);
-	 
+	 new_sock << "what file would you like to access? ";
+	 new_sock >> file_name;
+	 ifs.open(file_name.c_str(), std::ifstream::in);
 	 // For multiple threading, you need to create
 	 // a new thread here and pass new_sock to it.
 	 // The thread will use new_sock to communicate

@@ -2,6 +2,10 @@
 #include "SocketException.h"
 #include <iostream>
 #include <string>
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
 
 //conver the string to it's binary int rep
 void str_to_int (std::string data, int bin_len[])
@@ -59,18 +63,20 @@ std::string int_to_str (int bin_len[], int size)
    return data_c;
 }
 
-int main(int argc, int argv[])
+void *client_main(void *ptr)
 {
    int counter = 0;
    try{
 //variables
+      
       std::string serv_name;
       int port_name;
       std::string reply,//the frame from the server
 	 data,//the frame is stored locally here
 	 data_c,
 	 data_rep;
-      
+      std::string file_name;
+      int line_num;
 //get the IP address for the server and the port number.     
       std::cout << "Please enter the IP address for the server (localhost for default): ";
       std::cin >> serv_name;
@@ -81,7 +87,14 @@ int main(int argc, int argv[])
       // Usually in real applications, the following
       // will be put into a loop. 
       try {
-	 for (int i = 0; i < 1000; i++)//get 1000 frames from the user
+	 
+	 client_socket >> reply;
+	 std::cout << reply;
+	 std::cin >> file_name;
+	 client_socket << file_name;
+	 std::cout << "how many lines would you like to retrive from the file? ";
+	 std::cin >> line_num;
+	 for (int i = 0; i < line_num; i++)
 	 {
 	    counter++;
 //get the frame from the server
@@ -155,6 +168,27 @@ int main(int argc, int argv[])
    catch(SocketException& e){
       std::cout << "Exception was caught:" << e.description() << "\n";
    }
+   return NULL;
+}
 
-   return 0;
+int main (int argc, int argv[])
+{
+   pthread_t thread1, thread2, thread3, thread4, thread5;
+   int client1, client2, client3, client4, client5;
+   client1 = pthread_create(&thread1, NULL, &client_main, NULL);
+   pthread_join (thread1, NULL);
+
+   client2 = pthread_create(&thread2, NULL, &client_main, NULL);
+   pthread_join (thread2, NULL);
+
+   client3 = pthread_create(&thread3, NULL, &client_main, NULL);
+   pthread_join (thread3, NULL);
+
+   client4 = pthread_create(&thread4, NULL, &client_main, NULL);
+   pthread_join (thread4, NULL);
+
+   client5 = pthread_create(&thread5, NULL, &client_main, NULL);
+   pthread_join (thread5, NULL);
+
+   exit(EXIT_SUCCESS);
 }

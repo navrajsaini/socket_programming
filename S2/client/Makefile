@@ -11,7 +11,7 @@ all : client
 #	g++ -std=c++11 $(server) -o server
 
 client: $(client)
-	g++ -std=c++11 $(client) -o client
+	g++ -std=c++11 $(client) -pthread -o client
 
 
 #Socket: Socket.cpp 
